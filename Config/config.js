@@ -51,7 +51,7 @@ config={
 				httpOnly: false,
 				maxAge  : 24*60*60*10
 			},
-			secret: 'amijosmios',
+			secret: 'claveSecreta',
 			resave: false,
 			saveUninitialized: true
 		}))
