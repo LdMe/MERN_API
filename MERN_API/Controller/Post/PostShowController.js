@@ -32,7 +32,7 @@ const PostShowController= {
 		
 	},
 	show: function(req,res){
-		let temp =req.originalUrl.split("post/name/");
+		let temp =req.originalUrl.split("post/show/");
 		let url= temp[temp.length - 1];
 		url=config.ObjectId(url.split("/")[0]);
 		let username = req.session.username;

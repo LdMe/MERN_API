@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 
 const server = 'localhost'+':'+27042; // REPLACE WITH YOUR DB SERVER
-const database = 'mern-react-native';      // REPLACE WITH YOUR DB NAME
+const database = 'mern-api';      // REPLACE WITH YOUR DB NAME
 
 class Database {
   constructor() {

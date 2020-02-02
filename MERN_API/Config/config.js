@@ -1,11 +1,11 @@
 database= require('./database');
-imageUploader= require('../Controller/Post/imageUploadController')
 config={
 	port: 4242,
 	hostname: 'localhost',
 	key: 'ramdon_key',
 	database: database,
 	app: null,
+	uploadPath: '/public/uploads/',
 	dirname: __dirname.split("/Config")[0],
 	ObjectId: require('mongoose').Types.ObjectId,
 	express: require('express'),
