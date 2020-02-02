@@ -23,6 +23,9 @@ const PostCreateController= {
 				visibility: body.visibility
 
 			}
+			if( body.description ){
+					new_post["description"]=body.description
+				}
 			if(req.file){
 				console.log(req.file);
 				new_post["image"]=req.file.filename;

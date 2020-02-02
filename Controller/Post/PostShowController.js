@@ -40,7 +40,7 @@ const PostShowController= {
 			if(err){
 				return res.status(401).send("user not found");
 			}
-			let filter={id:url,visibility:'public'};
+			let filter={_id:url,visibility:'public'};
 			if(result){
 				filter={$or:[{_id:url, user: result.id},{_id:url,visibility:'public'}]};
 
@@ -50,7 +50,7 @@ const PostShowController= {
 				if(err){
 					return res.status(500).send("could not search posts");
 				}
-				if(!posts.length){
+				if(!posts){
 					return res.status(204).send("no post found")
 				}
 				return res.send(posts);
