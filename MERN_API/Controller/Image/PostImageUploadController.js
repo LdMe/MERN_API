@@ -1,14 +1,14 @@
 const multer = require("multer");
 const path = require("path");
 const post= require("../../Model/post");
-const uploadPath='/public/uploads/';
+const config = require('../../Config/config');
+const uploadPath = config.uploadPath;
 const fs = require('fs');
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		if(!req.session){
 			cb("session not found",false);
 		}
-		console.log(req.session.username);
 		let dir = "."+uploadPath  + req.session.username;
 		fs.exists(dir,exist => {
 			//user directory already exists
@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
 const upload = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		console.log(req.body);
+		
 		var ext = path.extname(file.originalname);
 
 		if(!file){

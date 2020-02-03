@@ -1,4 +1,6 @@
-config = require('../../Config/config');
+const post = require('../../Model/post');
+let user = require('../../Model/user');
+const config = require('../../Config/config');
 const fs = require('fs');
 PostEditController= {
 	delete(req,res){
