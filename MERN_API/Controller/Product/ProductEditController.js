@@ -1,13 +1,14 @@
 config = require('../../Config/config');
 const fs = require('fs');
-PostEditController= {
+ProductEditController= {
 	delete(req,res){
 		let body=req.body;
 		let filter= {
 			username: req.session.username
 		}
+		filter["roles"]={$all:["admin"]};
 		if(!body._id){
-			return res.status(500).send("post _id not found")
+			return res.status(500).send("product _id not found")
 		}
 		user.findOne(filter, function(err,new_user){
 			if(err){
@@ -16,25 +17,25 @@ PostEditController= {
 			if(!new_user){
 				return res.status(401).send("user not found");
 			}
-			post.findOne({_id:body._id},function(err,post_object){
+			product.findOne({_id:body._id},function(err,product_object){
 				if(err){
 					return res.status(401).send(err);
 				}
-				if(!post_object){
-					return res.status(401).send("post not found");
+				if(!product_object){
+					return res.status(401).send("product not found");
 				}
-				let imagePath=config.dirname+'/public/uploads/'+new_user.username+"/posts/"+post_object.image;
-				post.remove({_id:body._id},function(err,result){
+				let imagePath=config.dirname+'/public/uploads/products/'+product_object.image;
+				product.remove({_id:body._id},function(err,result){
 					if(err){
 						return res.status(401).send(err);
 					}
 					if(!result){
-						return res.status(500).send("post not found");
+						return res.status(500).send("product not found");
 					}
 					fs.unlink(imagePath,function(err){
 						console.log(err);
 					});
-					return res.send("post deleted");
+					return res.send("product deleted");
 
 				});
 			});
@@ -47,8 +48,9 @@ PostEditController= {
 		let filter= {
 			username: req.session.username
 		}
+		filter["roles"]={$all:["admin"]};
 		if(!body._id){
-			return res.status(400).send("post _id not found")
+			return res.status(400).send("product _id not found")
 		}
 		user.findOne(filter, function(err,new_user){
 			if(err){
@@ -57,40 +59,41 @@ PostEditController= {
 			if(!new_user){
 				return res.status(404).send("user not found");
 			}
-			post.findOne({_id:body._id},function(err,post_object){
+			product.findOne({_id:body._id},function(err,product_object){
 				if(err){
 					return res.status(500).send(err);
 				}
-				if(!post_object){
-					return res.status(404).send("post not found");
+				if(!product_object){
+					return res.status(404).send("product not found");
 				}
 
-				let _id= post_object.id;
-				let new_post= {_id: config.ObjectId(_id)};
-				body.title ? new_post["title"]=body.title: null;
-				if( body.description != post_object.description){
-					new_post["description"]=body.description
+				let _id= product_object.id;
+				let new_product= {_id: config.ObjectId(_id)};
+				body.title ? new_product["title"]=body.title: null;
+				body.price ? new_product["price"]=body.price: null;
+				if( body.description != product_object.description){
+					new_product["description"]=body.description
 				}
-				body.visibility ? new_post["visibility"]=body.visibility: null;
-				new_post["last_update"]= Date.now().toString();
-				console.log(new_post);
+				body.visibility ? new_product["visibility"]=body.visibility: null;
+				new_product["last_update"]= Date.now().toString();
+				//if file added, remove previous one
 				if(req.file){
 					console.log(req.file);
-					fs.unlink(config.dirname+'/public/uploads/'+new_user.username+"/posts/"+post_object.image,function(err){
+					fs.unlink(config.dirname+'/public/uploads/'+new_user.username+"/products/"+product_object.image,function(err){
 						console.log(err);
 					});
-					new_post["image"]=req.file.filename;
+					new_product["image"]=req.file.filename;
 				}
-				post.updateOne({_id:_id, user:new_user},new_post, function(error,post_created){
+				product.updateOne({_id:_id, user:new_user},new_product, function(error,product_created){
 					if(err){
 						console.log("error");
 						console.log(err.message);
 						return res.status(500).send(err.message);
 					}
-					if(!post_created){
-						return res.status(500).send("could not edit post");
+					if(!product_created){
+						return res.status(500).send("could not edit product");
 					}
-					console.log("post edited");
+					console.log("product edited");
 					return res.send(post_created);
 				});
 			});
@@ -99,4 +102,4 @@ PostEditController= {
 		
 	}
 }
-module.exports=PostEditController;
+module.exports=ProductEditController;
