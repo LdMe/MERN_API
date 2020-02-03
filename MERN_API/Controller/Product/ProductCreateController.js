@@ -16,7 +16,7 @@ const ProductCreateController= {
 				return res.status(401).send(err);
 			}
 			if(!new_user){
-				return res.status(401).send("user does not exist or it has no rights to do this action");
+				return res.status(401).send("user has no rights to do this action");
 			}
 			let new_product= {
 				title: body.title,
@@ -33,7 +33,7 @@ const ProductCreateController= {
 				console.log(req.file);
 				new_product["image"]=req.file.filename;
 			}
-			product.create(new_product, function(error,product_created){
+			product.create(new_product, function(err,product_created){
 				if(err){
 					console.log("error");
 						console.log(err.message);

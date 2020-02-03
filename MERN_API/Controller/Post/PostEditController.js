@@ -57,7 +57,7 @@ PostEditController= {
 				return res.status(500).send(err);
 			}
 			if(!new_user){
-				return res.status(404).send("user not found");
+				return res.status(401).send("user has no rights to do this action");
 			}
 			post.findOne({_id:body._id},function(err,post_object){
 				if(err){

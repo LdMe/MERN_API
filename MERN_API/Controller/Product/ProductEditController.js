@@ -59,7 +59,7 @@ ProductEditController= {
 				return res.status(500).send(err);
 			}
 			if(!new_user){
-				return res.status(404).send("user not found");
+				return res.status(401).send("user has no rights to do this action");
 			}
 			product.findOne({_id:body._id},function(err,product_object){
 				if(err){
@@ -86,7 +86,7 @@ ProductEditController= {
 					});
 					new_product["image"]=req.file.filename;
 				}
-				product.updateOne({_id:_id, user:new_user},new_product, function(error,product_created){
+				product.updateOne({_id:_id},new_product, function(error,product_created){
 					if(err){
 						console.log("error");
 						console.log(err.message);
@@ -96,7 +96,7 @@ ProductEditController= {
 						return res.status(500).send("could not edit product");
 					}
 					console.log("product edited");
-					return res.send(post_created);
+					return res.send("product edited");
 				});
 			});
 			

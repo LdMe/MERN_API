@@ -9,7 +9,7 @@ const CategoryCreateController= {
 			username: req.session.username,
 			
 		}
-		// only create categorys if admin
+		// only create categories if admin
 		filter["roles"]={$all:["admin"]};
 		user.findOne(filter, function(err,new_user){
 			if(err){
@@ -18,6 +18,7 @@ const CategoryCreateController= {
 			if(!new_user){
 				return res.status(401).send("user does not exist or it has no rights to do this action");
 			}
+			console.log(body);
 			let new_category= {
 				title: body.title,
 
@@ -25,17 +26,18 @@ const CategoryCreateController= {
 			if(body.description){
 				new_category["description"]=body.description;
 			}
-			category.create(new_category, function(error,category_created){
+			category.create(new_category, function(err,category_created){
 				if(err){
 					console.log("error");
-						console.log(err.message);
-						return res.send(err.message);
-					}
-					if(!category_created){
-						return res.send("category not created");
-					}
-					console.log("category created");
-					return res.send("category created");
+					console.log(err.message);
+					return res.send(err.message);
+				}
+				console.log(err)
+				if(!category_created){
+					return res.send("category not created");
+				}
+				console.log("category created");
+				return res.send("category created");
 			});
 		})
 		

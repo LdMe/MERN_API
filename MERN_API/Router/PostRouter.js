@@ -1,5 +1,4 @@
 const router=require('express').Router();
-const LoginController = require('../Controller/User/LoginController');
 const PostCreateController = require('../Controller/Post/PostCreateController');
 const PostEditController = require('../Controller/Post/PostEditController');
 const PostShowController = require('../Controller/Post/PostShowController');
@@ -14,9 +13,6 @@ router.get('/post/show/*', function(req,res) {
 });
 router.get('/images/posts/*', function(req,res) {
 	return imageShowController.showPost(req,res);
-});
-router.post('/login',function(req,res) {
-	return LoginController.login(req,res);
 });
 router.post('/post/add',verify,upload.single('image'), function(req,res) {
 	return PostCreateController.create(req,res);

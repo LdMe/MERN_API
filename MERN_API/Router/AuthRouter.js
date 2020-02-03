@@ -5,9 +5,6 @@ const RegisterController = require('../Controller/User/RegisterController');
 const VerificationController = require('../Controller/User/VerificationController');
 const verify = require('../Controller/User/VerificationController');
 
-router.get('/login', function(req,res) {
-	return LoginController.showForm(req,res);
-});
 router.get('/logout', function(req,res) {
 	return LogoutController.logout(req,res);
 });

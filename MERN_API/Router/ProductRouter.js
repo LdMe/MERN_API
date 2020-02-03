@@ -1,5 +1,4 @@
 const router=require('express').Router();
-const LoginController = require('../Controller/User/LoginController');
 const ProductCreateController = require('../Controller/Product/ProductCreateController');
 const ProductEditController = require('../Controller/Product/ProductEditController');
 const ProductShowController = require('../Controller/Product/ProductShowController');
@@ -14,9 +13,6 @@ router.get('/product/show/*', function(req,res) {
 });
 router.get('/images/products/*', function(req,res) {
 	return imageShowController.showProduct(req,res);
-});
-router.post('/login',function(req,res) {
-	return LoginController.login(req,res);
 });
 router.post('/product/add',verify,upload.single('image'), function(req,res) {
 	return ProductCreateController.create(req,res);
