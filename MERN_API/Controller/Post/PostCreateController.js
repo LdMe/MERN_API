@@ -6,7 +6,7 @@ const PostCreateController= {
 		console.log(req.file);
 		let body=req.body;
 		let filter= {
-			username: body.username
+			username: req.session.username
 		}
 		user.findOne(filter, function(err,new_user){
 			if(err){

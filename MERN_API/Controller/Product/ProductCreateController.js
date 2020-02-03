@@ -6,7 +6,7 @@ const ProductCreateController= {
 		console.log(req.file);
 		let body=req.body;
 		let filter= {
-			username: body.username,
+			username: req.session.username,
 			
 		}
 		// only create products if admin
@@ -16,7 +16,7 @@ const ProductCreateController= {
 				return res.status(401).send(err);
 			}
 			if(!new_user){
-				return res.status(401).send("user not found");
+				return res.status(401).send("user does not exist or it has no rights to do this action");
 			}
 			let new_product= {
 				title: body.title,
@@ -27,7 +27,7 @@ const ProductCreateController= {
 				new_product["description"]=body.description;
 			}
 			if(body.category){
-				new_product["category"]=body.category;
+				new_product["category"]=config.ObjectId(body.category);
 			}
 			if(req.file){
 				console.log(req.file);
