@@ -93,7 +93,7 @@ PostEditController= {
 						return res.status(500).send("could not edit post");
 					}
 					console.log("post edited");
-					return res.send(post_created);
+					return res.send("post edited succesfully");
 				});
 			});
 			

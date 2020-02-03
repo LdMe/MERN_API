@@ -16,20 +16,22 @@ const storage = multer.diskStorage({
 				fs.mkdir(dir, { recursive: true },(error) =>{
 					dir=dir+"/posts";
 					fs.mkdir(dir, { recursive: true },(error) =>{
-					
-					return cb(error,dir)
+						
+						return cb(error,dir)
 					});
 				});
 			}
-			dir=dir+"/posts";
-			fs.exists(dir,exist => {
-				if(!exist){
-					return fs.mkdir(dir, { recursive: true },(error) => cb(error,dir));
-				}
-				
+			else{
+				dir=dir+"/posts";
+				fs.exists(dir,exist => {
+					if(!exist){
+						return fs.mkdir(dir, { recursive: true },(error) => cb(error,dir));
+					}
+					
 
-				return cb(null,dir);
-			});
+					return cb(null,dir);
+				});
+			}
 		});
 	},
 
