@@ -1,4 +1,6 @@
-config = require('../../Config/config');
+const product = require('../../Model/product');
+let user = require('../../Model/user');
+const config = require('../../Config/config');
 const fs = require('fs');
 ProductEditController= {
 	delete(req,res){
