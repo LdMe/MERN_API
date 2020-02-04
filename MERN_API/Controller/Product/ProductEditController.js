@@ -69,15 +69,13 @@ ProductEditController= {
 					return res.status(404).send("product not found");
 				}
 
-				let _id= product_object.id;
+				let _id= product_object._id;
 				let new_product= {_id: config.ObjectId(_id)};
 				body.title ? new_product["title"]=body.title: null;
 				body.price ? new_product["price"]=body.price: null;
 				if( body.description != product_object.description){
 					new_product["description"]=body.description
 				}
-				body.visibility ? new_product["visibility"]=body.visibility: null;
-				new_product["last_update"]= Date.now().toString();
 				//if file added, remove previous one
 				if(req.file){
 					console.log(req.file);

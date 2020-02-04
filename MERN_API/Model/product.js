@@ -16,7 +16,8 @@ let productSchema = new mongoose.Schema({
 		type: String
 	},
 	price: {
-		type: Number
+		type: Number,
+		default: 0
 	}
 
 

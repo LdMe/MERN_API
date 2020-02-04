@@ -34,9 +34,6 @@ CategoryEditController= {
 					if(!result){
 						return res.status(500).send("category not found");
 					}
-					fs.unlink(imagePath,function(err){
-						console.log(err);
-					});
 					return res.send("category deleted");
 
 				});

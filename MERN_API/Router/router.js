@@ -20,6 +20,9 @@ router.use(ProductRouter);
 //-- Router for Category related routes
 const CategoryRouter = require('./CategoryRouter');
 router.use(CategoryRouter);
+//-- Router for Order related routes
+const OrderRouter = require('./OrderRouter');
+router.use(OrderRouter);
 //-- Router for readme
 const ReadmeRouter = require('./ReadmeRouter');
 router.use(ReadmeRouter);
