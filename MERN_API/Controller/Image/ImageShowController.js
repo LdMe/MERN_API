@@ -1,4 +1,5 @@
 post= require('../../Model/post');
+product= require('../../Model/product');
 user= require('../../Model/user');
 const config = require('../../Config/config');
 const uploadPath = config.uploadPath;
