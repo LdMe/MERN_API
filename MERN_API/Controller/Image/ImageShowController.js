@@ -10,7 +10,7 @@ imageShowController = {
 		let url= temp[temp.length - 1];ç
 		let product_id = config.ObjectId(url.split(username+"/")[1]);
 		
-		product.findOne({_id: product_id, visibility:"public"},function(err,result){
+		product.findOne({_id: product_id},function(err,result){
 			if(err){
 				res.status(500).send("error searching image");
 			}
