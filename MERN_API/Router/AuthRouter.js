@@ -3,6 +3,7 @@ const LoginController = require('../Controller/User/LoginController');
 const LogoutController = require('../Controller/User/LogoutController');
 const RegisterController = require('../Controller/User/RegisterController');
 const VerificationController = require('../Controller/User/VerificationController');
+const RoleController = require('../Controller/User/RoleController');
 const verify = require('../Controller/User/VerificationController');
 
 router.get('/logout', function(req,res) {
@@ -18,6 +19,6 @@ router.post('/register', function(req,res) {
 	return RegisterController.register(req,res);
 });
 router.get('/verify',verify, function(req,res) {
-	return res.send("admin")
+	return RoleController(req,res);
 });
 module.exports= router;
