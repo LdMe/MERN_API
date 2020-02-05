@@ -8,7 +8,7 @@ imageShowController = {
 
 		let temp =req.originalUrl.split("images/products/");
 		let url= temp[temp.length - 1];
-		let product_id = config.ObjectId(url.split(username+"/")[1]);
+		let product_id = config.ObjectId(url);
 		
 		product.findOne({_id: product_id},function(err,result){
 			if(err){
