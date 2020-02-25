@@ -3,8 +3,12 @@ const user= require('../../Model/user');
 const config = require('../../Config/config');
 const ProductShowController= {
 	showAll: function(req,res){
-		//product.find().sort([['title',1]]).populate("category").exec(function(err,products){
-		product.find().sort([['title',1]]).populate("category").exec(function(err,products){
+		let filter= {};
+		console.log(req.query);
+		if(req.query._id){
+			filter= {category:config.ObjectId(req.query._id)}
+		}
+		product.find(filter).sort([['title',1]]).populate("category").exec(function(err,products){
 			if(err){
 				return res.status(401).send(err);
 			}

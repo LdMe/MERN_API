@@ -2,7 +2,6 @@
 //function to know user role
 
 
-const jwt = require('jsonwebtoken');
 const config= require('../../Config/config');
 
 function checkRole(req, res){
